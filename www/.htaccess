@@ -1,0 +1,28 @@
+#AuthName "Restricted Area" 
+#AuthType Basic 
+#AuthUserFile /var/www/html/htpasswd 
+#AuthGroupFile /dev/null 
+#require valid-user
+
+RewriteEngine on
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+<files index-dev.php>
+ order deny,allow
+ deny from all
+ allow from 127.0.0.1
+ allow from localhost
+</files>
+
+<files index-test.php>
+ order deny,allow
+ deny from all
+ allow from 127.0.0.1
+ allow from localhost
+</files>
